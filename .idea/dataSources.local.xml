@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - socialnetworkdb@localhost" uuid="ebbded86-634b-491c-adfa-f5c0936a4f05">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>socialnetworkdb.*</schema-pattern>
+      <default-schemas>socialnetworkdb.*</default-schemas>
+    </data-source>
+  </component>
+</project>

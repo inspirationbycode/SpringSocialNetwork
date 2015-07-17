@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - socialnetworkdb@localhost" uuid="ebbded86-634b-491c-adfa-f5c0936a4f05">
+    <database-info product="MySQL" version="5.6.25-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="socialnetworkdb"/>
+    <table name="comments" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_post" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_Comments_Post" columns="id_post" ref-table="post" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Comments_User" columns="id_user" ref-table="user" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="FK_Comments_Post_idx" unique="false" columns="id_post"/>
+      <index name="FK_Comments_User_idx" unique="false" columns="id_user"/>
+    </table>
+    <table name="friends" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_friend" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_Friend_User1" columns="id_user" ref-table="user" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Friend_User2" columns="id_friend" ref-table="user" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="FK_Friend_User1_idx" unique="false" columns="id_user"/>
+      <index name="FK_Friend_User2_idx" unique="false" columns="id_friend"/>
+    </table>
+    <table name="photo" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="name" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="false" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_Post_Photo" table="post" schema="" catalog="socialnetworkdb" columns="id_photo"/>
+      <exported-key name="FK_User_Photo" table="user" schema="" catalog="socialnetworkdb" columns="id_photo"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+    </table>
+    <table name="post" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_photo" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_Post_Photo" columns="id_photo" ref-table="photo" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_Post_User" columns="id_user" ref-table="user" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_Comments_Post" table="comments" schema="" catalog="socialnetworkdb" columns="id_post"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="FK_Post_Photo_idx" unique="false" columns="id_photo"/>
+      <index name="FK_Post_User_idx" unique="false" columns="id_user"/>
+    </table>
+    <table name="roles" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="name" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_User_in_roles_Role" table="user_in_roles" schema="" catalog="socialnetworkdb" columns="id_role"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="name_UNIQUE" unique="true" columns="name"/>
+    </table>
+    <table name="user" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="first_name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone_number" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="id_photo" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password_salt" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_activated" sqlType="BIT" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_User_Photo" columns="id_photo" ref-table="photo" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_Comments_User" table="comments" schema="" catalog="socialnetworkdb" columns="id_user"/>
+      <exported-key name="FK_Friend_User1" table="friends" schema="" catalog="socialnetworkdb" columns="id_user"/>
+      <exported-key name="FK_Friend_User2" table="friends" schema="" catalog="socialnetworkdb" columns="id_friend"/>
+      <exported-key name="FK_Post_User" table="post" schema="" catalog="socialnetworkdb" columns="id_user"/>
+      <exported-key name="FK_User_in_roles_User" table="user_in_roles" schema="" catalog="socialnetworkdb" columns="id_user"/>
+      <index name="email_UNIQUE" unique="true" columns="email"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="FK_User_Photo_idx" unique="false" columns="id_photo"/>
+    </table>
+    <table name="user_in_roles" schema="" catalog="socialnetworkdb" type="TABLE">
+      <column name="id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="id_role" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_User_in_roles_Role" columns="id_role" ref-table="roles" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_User_in_roles_User" columns="id_user" ref-table="user" ref-schema="" ref-catalog="socialnetworkdb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="id_UNIQUE" unique="true" columns="id_user"/>
+      <index name="id_UNIQUE1" unique="true" columns="id"/>
+      <index name="FK_User_in_roles_Role_idx" unique="false" columns="id_role"/>
+    </table>
+  </data-source>
+</component>

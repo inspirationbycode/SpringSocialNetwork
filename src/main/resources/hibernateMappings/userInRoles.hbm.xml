@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dashaspivak.socialnetwork.model.User_in_roles" table="User_in_roles">
+        <id column="Id" name="id" type="java.lang.Long" >
+            <generator class = "increment"/>
+        </id>
+        <property column="Id_user" name="id_user" type="java.lang.Long" />
+        <property column="Id_role" name="id_role" type="java.lang.Long" />
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/SocialNetworkDB</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Iamafooller42</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">validate</property>
+
+        <mapping resource="hibernateMappings/comments.hbm.xml" />
+        <mapping resource="hibernateMappings/friends.hbm.xml" />
+        <mapping resource="hibernateMappings/photo.hbm.xml" />
+        <mapping resource="hibernateMappings/posts.hbm.xml" />
+        <mapping resource="hibernateMappings/roles.hbm.xml" />
+        <mapping resource="hibernateMappings/user.hbm.xml" />
+        <mapping resource="hibernateMappings/userInRoles.hbm.xml" />
+
+        <mapping class="com.dashaspivak.socialnetwork.model.Comments"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.Friends"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.Photo"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.Post"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.Roles"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.User"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.User_in_roles"/>
+    </session-factory>
+</hibernate-configuration>

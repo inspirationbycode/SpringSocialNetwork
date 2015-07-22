@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Banner -->
 <section id="banner">
     <div class="content">
         <header>
             <h1>Registration Form</h1>
-            <form action="RegistrationController" method="post">
+            <form action="register" method="post" modelAttribute="user" enctype="multipart/form-data">
                 <table cellpadding="3pt">
                     <tr>
                         <td>First Name :</td>
@@ -27,6 +27,10 @@
                     <tr>
                         <td>Password :</td>
                         <td><input type="password" name="password" size="30"/></td>
+                    </tr>
+                    <tr>
+                        <td>Photo :</td>
+                        <td><input type="file" name="file"></td>
                     </tr>
                 </table>
                 <p/>

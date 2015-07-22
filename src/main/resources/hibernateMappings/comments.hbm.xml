@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dashaspivak.socialnetwork.model.Comments" table="Comments">
+        <id column="Id" name="id" type="java.lang.Long" >
+            <generator class = "increment"/>
+        </id>
+        <property column="Id_user" name="id_user" type="java.lang.Long" />
+        <property column="Id_post" name="Id_post" type="java.lang.Long" />
+        <property column="Description" name="description" type="java.lang.String" />
+        <property column="Date" name="date" type="java.time.LocalDate" />
+
+    </class>
+</hibernate-mapping>

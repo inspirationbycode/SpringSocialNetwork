@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -32,13 +34,22 @@
           <a href="?lang=en">En</a>
           <a href="?lang=ru">Rus</a>
         </li>
-        <spring:url value="/page/{pageName}" var="singUp_url" htmlEscape="true">
-          <spring:param name="pageName" value="SingUp"/>
-        </spring:url>
-        <li><a href="${singUp_url}" class="button special"><spring:message code="resource.sing_up"/></a></li>
-        <spring:url value="/page/{pageName}" var="register_url" htmlEscape="true">
-          <spring:param name="pageName" value="Registration"/>
-        </spring:url>
+
+        <sec:authorize access="!isAuthenticated()">
+            <spring:url value="/user/login" var="singUp_url" htmlEscape="true"/>
+            <li><a href="${singUp_url}" class="button special"><spring:message code="resource.sing_up"/></a></li>
+        </sec:authorize>
+
+        <sec:authorize access="isAuthenticated()">
+            <li>
+              <form action="/logout" method="post">
+                  <input type="submit" value="<spring:message code='resource.log_out'/>" class="button special" />
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+              </form>
+          </li>
+        </sec:authorize>
+
+        <spring:url value="/user/register" var="register_url" htmlEscape="true"/>
         <li><a href="${register_url}" class="button special"><spring:message code="resource.registration"/></a></li>
       </ul>
     </nav>

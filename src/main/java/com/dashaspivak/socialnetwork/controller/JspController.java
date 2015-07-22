@@ -14,8 +14,6 @@ public class JspController {
             return "Rules";
         if(pageName.equalsIgnoreCase("AboutSite"))
             return "About_Site";
-        if(pageName.equalsIgnoreCase("SingUp"))
-            return "SingUp";
         if(pageName.equalsIgnoreCase("Registration"))
             return "register";
         return "index";

@@ -19,6 +19,11 @@
     <mvc:resources mapping="/js/**" location="/resources/js/"/>
     <mvc:resources mapping="/sass/**" location="WEB-INF/sass/"/>
 
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang" />
+        </bean>
+    </mvc:interceptors>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -43,9 +48,18 @@
         </property>
     </bean>
 
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-            <property name="paramName" value="lang" />
-        </bean>
-    </mvc:interceptors>
+    <!-- Photo upload -->
+    <bean id="multipartResolver"
+                class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="100000" />
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/SocialNetworkDB" />
+        <property name="username" value="root" />
+        <property name="password" value="Iamafooller42" />
+    </bean>
 </beans>

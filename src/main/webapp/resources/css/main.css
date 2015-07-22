@@ -3159,6 +3159,9 @@ input[type="button"].special,
     background-color: #e44c65;
     box-shadow: none;
     color: #ffffff !important;
+    height: 2em;
+    line-height: 2em;
+    padding: 0 1.25em;
 }
 
 input[type="submit"].special:hover,

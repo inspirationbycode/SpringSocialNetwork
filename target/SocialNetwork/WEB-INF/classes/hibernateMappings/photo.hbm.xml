@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dashaspivak.socialnetwork.model.Photo" table="Photo">
+        <id column="Id" name="id" type="java.lang.Long" >
+            <generator class = "increment"/>
+        </id>
+        <property column="Name" name="name" type="java.sql.Blob" />
+
+        <set name="posts" lazy="false">
+            <key column="id_photo"/>
+            <one-to-many class="com.dashaspivak.socialnetwork.model.Post"/>
+        </set>
+        <set name="users" lazy="false">
+            <key column="id_photo"/>
+            <one-to-many class="com.dashaspivak.socialnetwork.model.User"/>
+        </set>
+    </class>
+</hibernate-mapping>

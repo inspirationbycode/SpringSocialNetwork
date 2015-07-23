@@ -1,5 +1,9 @@
 package com.dashaspivak.socialnetwork.model;
 
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.util.Set;
 
 public class User extends BaseEntity {
@@ -9,7 +13,6 @@ public class User extends BaseEntity {
     private long id_photo;
     private String email;
     private String password;
-    private String password_salt;
     private boolean active;
     private Set posts;
     private Set comments;
@@ -17,9 +20,16 @@ public class User extends BaseEntity {
     private Set users;
     private Set friends;
     private Photo photo;
+    @Fetch(FetchMode.JOIN)
+    private VerificationToken verificationToken;
 
 
     public User() {
+    }
+
+    @Override
+    public String toString(){
+        return this.last_name + " " + this.first_name;
     }
 
     public void setFirst_name(String first_name) {
@@ -44,10 +54,6 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setPassword_salt(String password_salt) {
-        this.password_salt = password_salt;
     }
 
     public void setActive(boolean active) {
@@ -78,15 +84,8 @@ public class User extends BaseEntity {
         return password;
     }
 
-    public String getPassword_salt() {
-        return password_salt;
-    }
-
     public boolean isActive() {
         return active;
-    }
-
-    public void setDataSource(org.springframework.jdbc.datasource.DriverManagerDataSource dataSource) {
     }
 
     public Set getPosts() {
@@ -135,6 +134,14 @@ public class User extends BaseEntity {
 
     public void setPhoto(Photo photo) {
         this.photo = photo;
+    }
+
+    public VerificationToken getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(VerificationToken verificationToken) {
+        this.verificationToken = verificationToken;
     }
 }
 

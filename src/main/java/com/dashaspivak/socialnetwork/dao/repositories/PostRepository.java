@@ -1,6 +1,6 @@
 package com.dashaspivak.socialnetwork.dao.repositories;
 
-import com.dashaspivak.socialnetwork.interfaces.IPostRepository;
+import com.dashaspivak.socialnetwork.interfaces.repositories.IPostRepository;
 import com.dashaspivak.socialnetwork.model.Post;
 import com.dashaspivak.socialnetwork.model.User;
 import org.hibernate.Session;

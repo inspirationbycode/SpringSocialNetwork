@@ -10,9 +10,8 @@
         <property column="Last_name" name="last_name" type="java.lang.String" />
         <property column="Phone_number" name="phone_number" type="java.lang.String" />
         <property column="Id_photo" name="id_photo" type="java.lang.Long" />
-        <property column="Email" name="email" type="java.lang.String" />
+        <property column="Email" name="email" type="java.lang.String" unique="true" />
         <property column="Password" name="password" type="java.lang.String" />
-        <property column="Password_salt" name="password_salt" type="java.lang.String" />
         <property column="Is_activated" name="active" type="java.lang.Boolean" />
 
         <set name="posts" lazy="false">
@@ -23,8 +22,8 @@
             <key column="id_user"/>
             <one-to-many class="com.dashaspivak.socialnetwork.model.Comments"/>
         </set>
-        <set name="userInRoles" lazy="false">
-            <key column="id_user"/>
+        <set name="userInRoles" lazy="false" cascade="delete">
+            <key column="id_user" />
             <one-to-many class="com.dashaspivak.socialnetwork.model.User_in_roles"/>
         </set>
         <set name="users" lazy="false">
@@ -35,5 +34,9 @@
             <key column="id_friend"/>
             <one-to-many class="com.dashaspivak.socialnetwork.model.Friends"/>
         </set>
+
+        <many-to-one name="verificationToken" column="verification_token" unique="true" fetch="join"
+                     class="com.dashaspivak.socialnetwork.model.VerificationToken" not-null="true"/>
+
     </class>
 </hibernate-mapping>

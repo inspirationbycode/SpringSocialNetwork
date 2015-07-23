@@ -22,6 +22,8 @@
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/security-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/security-context.xml</file>
           <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/classes/hibernate-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/classes/spring-mail.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/classes/spring-mail.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -50,6 +52,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.mysql.jdbc_5.1.5" level="project" />
     <orderEntry type="library" name="org.hibernate:hibernate-core:4.3.4.Final" level="project" />
+    <orderEntry type="library" name="org.springframework.data:spring-data-commons-core:1.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.1.7.RELEASE" level="project" />
@@ -58,6 +61,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.1.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:4.0.1.RELEASE" level="project" />
@@ -89,5 +93,7 @@
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: javax.mail:mail:1.4.3" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
   </component>
 </module>

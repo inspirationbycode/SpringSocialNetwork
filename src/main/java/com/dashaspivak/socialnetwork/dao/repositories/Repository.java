@@ -1,12 +1,13 @@
 package com.dashaspivak.socialnetwork.dao.repositories;
 
 import com.dashaspivak.socialnetwork.dao.HibernateUtil;
-import com.dashaspivak.socialnetwork.interfaces.IRepository;
+import com.dashaspivak.socialnetwork.interfaces.repositories.IRepository;
 import com.dashaspivak.socialnetwork.model.BaseEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Repository<T extends BaseEntity> implements IRepository<T> {
@@ -20,7 +21,7 @@ public class Repository<T extends BaseEntity> implements IRepository<T> {
     }
 
     @Override
-    public void Add(T entity) {
+    public void Add(T entity) throws SQLException {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -28,19 +29,19 @@ public class Repository<T extends BaseEntity> implements IRepository<T> {
             transaction = session.beginTransaction();
             session.save(entity);
             session.getTransaction().commit();
+            session.close();
         }
         catch (Exception ex){
             transaction.rollback();
-        }
-        finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
+            throw ex;
         }
     }
 
     @Override
-    public void Delete(T entity) {
+    public void Delete(T entity) throws SQLException {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -48,19 +49,19 @@ public class Repository<T extends BaseEntity> implements IRepository<T> {
             transaction = session.beginTransaction();
             session.delete(entity);
             session.getTransaction().commit();
+            session.close();
         }
         catch (Exception ex){
             transaction.rollback();
-        }
-        finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
+            throw ex;
         }
     }
 
     @Override
-    public void Update(T entity) {
+    public void Update(T entity) throws SQLException {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -68,14 +69,14 @@ public class Repository<T extends BaseEntity> implements IRepository<T> {
             transaction = session.beginTransaction();
             session.update(entity);
             session.getTransaction().commit();
+            session.close();
         }
         catch (Exception ex){
             transaction.rollback();
-        }
-        finally {
             if (session != null && session.isOpen()) {
                 session.close();
             }
+            throw ex;
         }
     }
 
@@ -86,11 +87,13 @@ public class Repository<T extends BaseEntity> implements IRepository<T> {
         try {
             session = this.sessionFactory.openSession();
             entities = session.createCriteria(type).list();
+            session.close();
         }
-        finally {
+        catch (Exception ex){
             if (session != null && session.isOpen()) {
                 session.close();
             }
+            throw ex;
         }
         return entities;
     }
@@ -101,13 +104,14 @@ public class Repository<T extends BaseEntity> implements IRepository<T> {
         T entity = null;
         try {
             session = this.sessionFactory.openSession();
-            entity = (T) session.load(type, id);
-
+            entity = (T) session.get(type, id);
+            session.close();
         }
-        finally {
+        catch (Exception ex){
             if (session != null && session.isOpen()) {
                 session.close();
             }
+            throw ex;
         }
         return entity;
     }

@@ -8,25 +8,27 @@
     <!-- static resources -->
     <security:http pattern="/(i|s|js|f)/.*\.(png|bmp|gif|css|js|ttf|fon)" security="none"/>
     <security:http auto-config="true" use-expressions="true" authentication-manager-ref="authenticationManager">
-        <security:intercept-url pattern="/page/AboutSite" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/general/AboutSite" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
         <security:intercept-url pattern="/**" access="permitAll"/>
 
-        <security:form-login login-page="/user/login"
-                             login-processing-url="/user/login"
-                             default-target-url="/page/index"
-                             authentication-failure-url="/page/Rules"
+        <security:form-login login-page="/account/login"
+                             login-processing-url="/account/login"
+                             default-target-url="/"
+                             authentication-failure-url="/account/login?error"
                              always-use-default-target="true"
                 />
-        <security:logout logout-url="/logout" logout-success-url="/page/index" delete-cookies="JSESSIONID"/>
+        <security:logout logout-url="/logout" logout-success-url="/account/successActivation" delete-cookies="JSESSIONID"/>
+        <security:csrf />
     </security:http>
 
     <security:authentication-manager id="authenticationManager">
         <security:authentication-provider>
+            <security:password-encoder ref="passwordEncoder"/>
             <security:jdbc-user-service id="jdbcUserDetailsManager" data-source-ref="dataSource"
                                         users-by-username-query="SELECT u.Email, u.Password, u.Is_activated FROM user as u WHERE Email = ?"
                                         authorities-by-username-query="SELECT u.Email, r.Name FROM user as u, roles as r, user_in_roles as ur
                                                                         WHERE ur.Id_role = r.Id and ur.Id_user = u.Id and u.Email = ?"/>
-            <!--<security:password-encoder ref="passwordEncoder"/>-->
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 
@@ -49,11 +51,18 @@
             </list>
         </constructor-arg>
     </bean>
-    <!--
-    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-    <bean id="authFailureHandler" class="com.gmail.vitalatron.mold.forum.model.event.handler.AuthenticationFailureHandlerImpl"/>
-    <bean id="authSuccessHandler" class="com.gmail.vitalatron.mold.forum.model.event.handler.AuthenticationSuccessHandlerImpl"/>
-    <bean id="logoutSuccessHandler" class="com.gmail.vitalatron.mold.forum.model.event.handler.LogoutSuccessHandlerImpl"/>
-    -->
+    <bean id="filterMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="-1" />
+    </bean>
+
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg name="strength" value="10" />
+    </bean>
+
+    <!--
+        <bean id="authFailureHandler" class="com.gmail.vitalatron.mold.forum.model.event.handler.AuthenticationFailureHandlerImpl"/>
+        <bean id="authSuccessHandler" class="com.gmail.vitalatron.mold.forum.model.event.handler.AuthenticationSuccessHandlerImpl"/>
+        <bean id="logoutSuccessHandler" class="com.gmail.vitalatron.mold.forum.model.event.handler.LogoutSuccessHandlerImpl"/>
+        -->
 </beans>

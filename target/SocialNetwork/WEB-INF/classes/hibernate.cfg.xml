@@ -21,6 +21,7 @@
         <mapping resource="hibernateMappings/roles.hbm.xml" />
         <mapping resource="hibernateMappings/user.hbm.xml" />
         <mapping resource="hibernateMappings/userInRoles.hbm.xml" />
+        <mapping resource="hibernateMappings/verificationToken.hbm.xml" />
 
         <mapping class="com.dashaspivak.socialnetwork.model.Comments"/>
         <mapping class="com.dashaspivak.socialnetwork.model.Friends"/>
@@ -29,5 +30,6 @@
         <mapping class="com.dashaspivak.socialnetwork.model.Roles"/>
         <mapping class="com.dashaspivak.socialnetwork.model.User"/>
         <mapping class="com.dashaspivak.socialnetwork.model.User_in_roles"/>
+        <mapping class="com.dashaspivak.socialnetwork.model.VerificationToken"/>
     </session-factory>
 </hibernate-configuration>

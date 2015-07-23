@@ -18,6 +18,7 @@
         <spring-security.version>4.0.1.RELEASE</spring-security.version>
         <sitemesh.version>2.4.2</sitemesh.version>
         <log4j.version>1.2.17</log4j.version>
+        <mail.api>1.4.3</mail.api>
     </properties>
 
     <dependencies>
@@ -42,6 +43,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
@@ -153,6 +160,13 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
+        </dependency>
+
+        <!-- Java Mail API -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.api}</version>
         </dependency>
 
     </dependencies>
